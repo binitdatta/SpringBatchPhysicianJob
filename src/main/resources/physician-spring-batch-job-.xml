@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       	xmlns:p="http://www.springframework.org/schema/p" 
+       	xmlns:tx="http://www.springframework.org/schema/tx"
+       	xmlns:context="http://www.springframework.org/schema/context"
+       	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       	xmlns:util="http://www.springframework.org/schema/util"
+       	xmlns:aop="http://www.springframework.org/schema/aop"
+       	xmlns:batch="http://www.springframework.org/schema/batch"
+       	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/jdbc 
+			http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+			http://www.springframework.org/schema/util 
+			http://www.springframework.org/schema/util/spring-util-3.1.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+			http://www.springframework.org/schema/batch 
+			http://www.springframework.org/schema/batch/spring-batch-2.1.xsd">
+
+	<context:property-placeholder properties-ref="springProperties" />
+	
+
+
+	<job id="physicianJob" xmlns="http://www.springframework.org/schema/batch">
+		<step id="physicianLoad" next="physicianAddressLoad">
+			<tasklet>
+				<chunk reader="physicianFileItemReader" writer="physicianWriter" 
+	                   commit-interval="${job.commit.interval}" />
+			</tasklet>
+		</step>
+		<step id="physicianAddressLoad" next="physicianDegreeLoad">
+			<tasklet>
+				<chunk reader="physicianAddressFileItemReader" writer="physicianAddressWriter" 
+	                   commit-interval="${job.commit.interval}" />
+			</tasklet>
+		</step>
+		<step id="physicianDegreeLoad" next="physicianSpecialityLoad">
+			<tasklet>
+				<chunk reader="physicianDegreeFileItemReader" writer="physicianDegreeWriter" 
+	                   commit-interval="${job.commit.interval}" />
+			</tasklet>
+		</step>
+		<step id="physicianSpecialityLoad">
+			<tasklet>
+				<chunk reader="physicianSpecailityFileItemReader" writer="physicianSpecialityWriter" 
+	                   commit-interval="${job.commit.interval}" />
+			</tasklet>
+		</step>
+	</job>
+
+	<bean id="physicianFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:${physician.file.name}" />
+		<property name="linesToSkip" value="1"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+						<property name="names" value="registration_id,physician_name,age,gender,dob,email,residence_land_phone,office_land_phone,cell_phone" />
+					</bean>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.rollingstone.phisician.ranker.spring.batch.PhysicianFieldSetMapper" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+<!--   REGISTRATION_ID	PHSICIAN_NAME	PHSICIAN_AGE	PHSICIAN_GENDER	PHSICIAN_DOB	EMAIL_ADDRESS	RESIDENCE_LAND_PHONE	OFFCE_LAND_PHONE	CELL_PHONE -->
+	
+	<bean id="physicianAddressFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:${physician.address.file.name}" />
+		<property name="linesToSkip" value="1"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+						<property name="names" value="registration_id,house_number,city,state,zip,country,type" />
+					</bean>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.rollingstone.phisician.ranker.spring.batch.PhysicianAddressFieldSetMapper" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+<!--   REGISTRATION_ID	HOUSE_NUMBER	CITY	STATE	ZIP	COUNTRY	TYPE -->
+
+
+
+	<bean id="physicianDegreeFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:${physician.degree.file.name}" />
+		<property name="linesToSkip" value="1"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+						<property name="names" value="registration_id,year_passed,percentage,degree_name" />
+					</bean>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.rollingstone.phisician.ranker.spring.batch.PhysicianDegreeFieldSetMapper" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+<!--  REGISTRATION_ID	YEAR_PASSED	PERCENTAGE	DEGREE_NAME  -->
+
+
+		<bean id="physicianSpecailityFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:${physician.speciality.file.name}" />
+		<property name="linesToSkip" value="1"/>
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+						<property name="names" value="registration_id,speciality,rank" />
+					</bean>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.rollingstone.phisician.ranker.spring.batch.PhysicianSpecialityFieldSetMapper" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	<!-- REGISTRATION_ID	SPACIALITY	RANK -->
+		
+</beans>
