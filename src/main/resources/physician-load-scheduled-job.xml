@@ -28,13 +28,13 @@
 	 	<context:property-placeholder properties-ref="springProperties" />
 	 
 
-		<bean name="physicianTask" class="com.rollingstone.phisician.ranker.spring.schedular.PhysicianLoaderTask" />
+		<bean name="physicianTask" class="com.rollingstone.physician.ranker.spring.schedular.PhysicianLoaderTask" />
 			
 				
 	<!-- Spring Quartz -->
 	<bean name="physicianScheduledJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 
-		<property name="jobClass" value="com.rollingstone.phisician.ranker.spring.schedular.PhysicianLoaderJob" />
+		<property name="jobClass" value="com.rollingstone.physician.ranker.spring.schedular.PhysicianLoaderJob" />
 
 		<property name="jobDataAsMap">
 			<map>

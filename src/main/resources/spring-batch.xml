@@ -40,9 +40,9 @@
 	    transaction-manager="transactionManager"/>
 
 	
-	<bean id="physicianWriter" class="com.rollingstone.phisician.ranker.spring.batch.PhysicianItemWriter"/>
-	<bean id="physicianAddressWriter" class="com.rollingstone.phisician.ranker.spring.batch.PhysicianAddressItemWriter"/>
-	<bean id="physicianDegreeWriter" class="com.rollingstone.phisician.ranker.spring.batch.PhysicianDegreeItemWriter"/>
-	<bean id="physicianSpecialityWriter" class="com.rollingstone.phisician.ranker.spring.batch.PhysicianSpecialityItemWriter"/>
+	<bean id="physicianWriter" class="com.rollingstone.physician.ranker.spring.batch.PhysicianItemWriter"/>
+	<bean id="physicianAddressWriter" class="com.rollingstone.physician.ranker.spring.batch.PhysicianAddressItemWriter"/>
+	<bean id="physicianDegreeWriter" class="com.rollingstone.physician.ranker.spring.batch.PhysicianDegreeItemWriter"/>
+	<bean id="physicianSpecialityWriter" class="com.rollingstone.physician.ranker.spring.batch.PhysicianSpecialityItemWriter"/>
 	
 </beans>

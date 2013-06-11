@@ -43,7 +43,7 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 
        			p:dataSource-ref="dataSource" />
        			
-     <bean id="physicianDao" class="com.rollingstone.phisician.ranker.spring.dao.PhysicianDao">
+     <bean id="physicianDao" class="com.rollingstone.physician.ranker.spring.dao.PhysicianDao">
      		<property name="dataSource" ref="dataSource" />
     </bean>
 		

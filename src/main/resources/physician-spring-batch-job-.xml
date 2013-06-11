@@ -66,7 +66,7 @@
 					</bean>
 				</property>
 				<property name="fieldSetMapper">
-					<bean class="com.rollingstone.phisician.ranker.spring.batch.PhysicianFieldSetMapper" />
+					<bean class="com.rollingstone.physician.ranker.spring.batch.PhysicianFieldSetMapper" />
 				</property>
 			</bean>
 		</property>
@@ -85,7 +85,7 @@
 					</bean>
 				</property>
 				<property name="fieldSetMapper">
-					<bean class="com.rollingstone.phisician.ranker.spring.batch.PhysicianAddressFieldSetMapper" />
+					<bean class="com.rollingstone.physician.ranker.spring.batch.PhysicianAddressFieldSetMapper" />
 				</property>
 			</bean>
 		</property>
@@ -106,7 +106,7 @@
 					</bean>
 				</property>
 				<property name="fieldSetMapper">
-					<bean class="com.rollingstone.phisician.ranker.spring.batch.PhysicianDegreeFieldSetMapper" />
+					<bean class="com.rollingstone.physician.ranker.spring.batch.PhysicianDegreeFieldSetMapper" />
 				</property>
 			</bean>
 		</property>
@@ -126,7 +126,7 @@
 					</bean>
 				</property>
 				<property name="fieldSetMapper">
-					<bean class="com.rollingstone.phisician.ranker.spring.batch.PhysicianSpecialityFieldSetMapper" />
+					<bean class="com.rollingstone.physician.ranker.spring.batch.PhysicianSpecialityFieldSetMapper" />
 				</property>
 			</bean>
 		</property>
