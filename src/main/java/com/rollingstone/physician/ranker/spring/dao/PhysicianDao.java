@@ -23,11 +23,6 @@ public class PhysicianDao extends JdbcDaoSupport implements IPhysicianDao {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(PhysicianDao.class);
 
-	/*
-	 * PhysicianDao(){ jdbcTemplate = new JdbcTemplate(getDataSource()); }
-	 * 
-	 * private JdbcTemplate jdbcTemplate;
-	 */
 
 	@Override
 	public void loadPhysician(Physician physician)
