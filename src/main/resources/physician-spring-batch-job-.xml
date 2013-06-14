@@ -32,25 +32,45 @@
 		<step id="physicianLoad" next="physicianAddressLoad">
 			<tasklet>
 				<chunk reader="physicianFileItemReader" writer="physicianWriter" 
-	                   commit-interval="${job.commit.interval}" />
+	                   commit-interval="${job.commit.interval}" skip-limit="${job.skip_limit}" >
+	            
+	            <skippable-exception-classes>
+					<include class="org.springframework.batch.item.file.FlatFileParseException" />
+				</skippable-exception-classes>
+	           </chunk>
 			</tasklet>
 		</step>
 		<step id="physicianAddressLoad" next="physicianDegreeLoad">
 			<tasklet>
 				<chunk reader="physicianAddressFileItemReader" writer="physicianAddressWriter" 
-	                   commit-interval="${job.commit.interval}" />
+	                   commit-interval="${job.commit.interval}" skip-limit="${job.skip_limit}" >
+	            
+	            <skippable-exception-classes>
+					<include class="org.springframework.batch.item.file.FlatFileParseException" />
+				</skippable-exception-classes>
+	           </chunk>
 			</tasklet>
 		</step>
 		<step id="physicianDegreeLoad" next="physicianSpecialityLoad">
 			<tasklet>
 				<chunk reader="physicianDegreeFileItemReader" writer="physicianDegreeWriter" 
-	                   commit-interval="${job.commit.interval}" />
+	                   commit-interval="${job.commit.interval}" skip-limit="${job.skip_limit}" >
+	            
+	            <skippable-exception-classes>
+					<include class="org.springframework.batch.item.file.FlatFileParseException" />
+				</skippable-exception-classes>
+	           </chunk>
 			</tasklet>
 		</step>
 		<step id="physicianSpecialityLoad">
 			<tasklet>
 				<chunk reader="physicianSpecailityFileItemReader" writer="physicianSpecialityWriter" 
-	                   commit-interval="${job.commit.interval}" />
+	                   commit-interval="${job.commit.interval}" skip-limit="${job.skip_limit}" >
+	            
+	            <skippable-exception-classes>
+					<include class="org.springframework.batch.item.file.FlatFileParseException" />
+				</skippable-exception-classes>
+	           </chunk>
 			</tasklet>
 		</step>
 	</job>
