@@ -9,8 +9,7 @@ import com.rollingstone.physician.ranker.domain.Physician;
 
 public class PhysicianFieldSetMapper implements FieldSetMapper<Physician> {
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+
 
 	@Override
 	public Physician mapFieldSet(FieldSet fs) {

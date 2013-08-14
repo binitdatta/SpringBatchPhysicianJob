@@ -25,9 +25,6 @@
 			http://www.springframework.org/schema/batch/spring-batch-2.1.xsd">
 
 	<context:property-placeholder properties-ref="springProperties" />
-	
-
-
 	<job id="physicianJob" xmlns="http://www.springframework.org/schema/batch">
 		<step id="physicianLoad" next="physicianAddressLoad">
 			<tasklet>

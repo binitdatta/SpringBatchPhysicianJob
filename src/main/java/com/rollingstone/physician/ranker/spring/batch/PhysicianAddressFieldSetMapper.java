@@ -14,8 +14,7 @@ import com.rollingstone.physician.ranker.domain.PhysicianAddress;
 public class PhysicianAddressFieldSetMapper implements
 		FieldSetMapper<PhysicianAddress> {
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+
 
 	@Override
 	public PhysicianAddress mapFieldSet(FieldSet fs) {

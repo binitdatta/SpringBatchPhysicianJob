@@ -12,8 +12,6 @@ import com.rollingstone.physician.ranker.domain.Speciality;
 public class PhysicianSpecialityFieldSetMapper implements
 		FieldSetMapper<PhysicianSpeciality> {
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public PhysicianSpeciality mapFieldSet(FieldSet fs) {
